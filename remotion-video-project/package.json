@@ -1,0 +1,30 @@
+{
+  "name": "remotion-video-project",
+  "version": "1.0.0",
+  "description": "AI 视频制作项目 - 基于 Remotion",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "remotion studio",
+    "preview": "remotion preview",
+    "build": "remotion render VideoTemplate out/video.mp4",
+    "build:tiktok": "remotion render TikTokCaption out/tiktok.mp4",
+    "build:custom": "remotion render [组件名] out/[输出名].mp4"
+  },
+  "keywords": [
+    "remotion",
+    "video",
+    "tiktok",
+    "ai"
+  ],
+  "author": "小哈米",
+  "license": "MIT",
+  "dependencies": {
+    "@remotion/cli": "^4.0.459",
+    "puppeteer-core": "^24.43.0",
+    "remotion": "^4.0.459"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.0.0"
+  }
+}
