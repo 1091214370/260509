@@ -81,49 +81,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({
   );
 };
 
-// 标签组件
-interface TagProps {
-  text: string;
-  delay?: number;
-  color?: string;
-  textColor?: string;
-}
 
-const Tag: React.FC<TagProps> = ({
-  text,
-  delay = 0,
-  color = '#FF2D55',
-  textColor = '#FFFFFF',
-}) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const visible = frame >= delay;
-  if (!visible) return null;
-
-  const scale = spring({
-    frame: frame - delay,
-    fps,
-    config: { damping: 200, stiffness: 200 },
-  });
-
-  return (
-    <span
-      style={{
-        backgroundColor: color,
-        color: textColor,
-        padding: '8px 20px',
-        borderRadius: 8,
-        fontSize: 28,
-        fontWeight: 600,
-        display: 'inline-block',
-        transform: `scale(${scale})`,
-      }}
-    >
-      #{text}
-    </span>
-  );
-};
 
 // 主视频模板组件
 export const VideoTemplate: React.FC = () => {
@@ -134,12 +92,6 @@ export const VideoTemplate: React.FC = () => {
   // 计算动画时间点
   const titleEndFrame = config.title.length * 2; // 每字2帧
   const subtitleStartFrame = titleEndFrame + 15;
-  const tagsStartFrame =
-    subtitleStartFrame +
-    (config.showSubtitle && config.subtitle
-      ? config.subtitle.length * 2
-      : 0) +
-    15;
 
   return (
     <AbsoluteFill
@@ -237,7 +189,7 @@ export const VideoTemplate: React.FC = () => {
         <div
           style={{
             textAlign: 'center',
-            marginBottom: config.showTags && config.tags.length > 0 ? 40 : 0,
+            marginBottom: config.showSubtitle && config.subtitle ? 30 : 0,
             position: 'relative',
             zIndex: 10,
           }}
@@ -250,31 +202,6 @@ export const VideoTemplate: React.FC = () => {
             delay={subtitleStartFrame}
             animation={config.enterAnimation}
           />
-        </div>
-      )}
-
-      {/* 底部标签 */}
-      {config.showTags && config.tags.length > 0 && (
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 80,
-            display: 'flex',
-            gap: 16,
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            zIndex: 10,
-          }}
-        >
-          {config.tags.map((tag, index) => (
-            <Tag
-              key={tag}
-              text={tag}
-              delay={tagsStartFrame + index * 8}
-              color={config.accentColor}
-              textColor="#FFFFFF"
-            />
-          ))}
         </div>
       )}
     </AbsoluteFill>
