@@ -4,6 +4,14 @@
 
 ---
 
+## AI 快速启动（供自动化执行）
+
+- 最小输入：`title`（字符串），`duration`（秒），`style`（如 `tiktok`/`minimal`/`tech`）
+- 期望输出：`src/VideoConfig.ts`、至少一个场景 `src/scenes/Scene1.tsx`、渲染命令 `npm run build`
+- 简洁工作流：1) 生成 `visual_prompt` 并返回给用户；2) 等待确认；3) 生成配置与场景骨架；4) 提供渲染与校验步骤
+- 自动校验：`duration>0`、`fps`（默认 30）、若 `enableAudio` 为 `true`，检查 `audioPath` 是否存在
+
+
 ## 📚 目录
 
 1. [技能概述](#技能概述)
@@ -29,6 +37,8 @@
 - **Remotion**: 用 React 代码生成视频的框架
 - **React + TypeScript**: 组件使用现代 React + 类型安全
 - **Node.js**: 运行环境
+
+
 
 ### 可制作的视频类型
 
