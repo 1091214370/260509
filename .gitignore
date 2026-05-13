@@ -3,3 +3,4 @@ out/
 dist/
 .remotion/
 *.log
+remotion-video-project/public/generated-audio.wav

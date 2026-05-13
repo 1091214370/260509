@@ -1,4 +1,4 @@
-import {AbsoluteFill, interpolate, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame} from 'remotion';
 import {HtmlOverlay} from './components/HtmlOverlay';
 import {ThreeStage} from './components/ThreeStage';
 import {videoConfig} from './VideoConfig';
@@ -13,6 +13,7 @@ export const VideoTemplate: React.FC = () => {
 
   return (
     <AbsoluteFill style={{backgroundColor: videoConfig.palette.background}}>
+      <Audio src={staticFile('generated-audio.wav')} volume={0.18} />
       <ThreeStage />
       <AbsoluteFill
         style={{

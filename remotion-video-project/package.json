@@ -4,10 +4,13 @@
   "private": true,
   "description": "Configuration-driven Remotion template for polished Three.js videos.",
   "scripts": {
+    "predev": "npm run ensure-audio",
     "dev": "remotion studio",
     "typecheck": "tsc --noEmit",
-    "still": "remotion still VideoTemplate out/frame-300.png --frame=300 --scale=0.25 --gl=angle",
-    "build": "remotion render VideoTemplate out/video.mp4 --codec=h264 --pixel-format=yuv420p --gl=angle"
+    "ensure-audio": "node scripts/ensure-audio.mjs",
+    "copy-desktop": "node scripts/copy-to-desktop.mjs",
+    "still": "npm run ensure-audio && remotion still VideoTemplate out/frame-300.png --frame=300 --scale=0.25 --gl=angle",
+    "build": "npm run ensure-audio && remotion render VideoTemplate out/video.mp4 --codec=h264 --pixel-format=yuv420p --gl=angle && npm run copy-desktop"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",

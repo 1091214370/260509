@@ -14,6 +14,8 @@ Turn rough user intent into a polished 20-second Remotion video powered by Three
 - Resolution: 1080x1920 vertical by default. Use 1920x1080 only when the user explicitly asks for landscape.
 - Frame rate: 30 fps by default.
 - Assets: keep local static files in `public/` and reference them with `staticFile()` when needed.
+- Delivery: after rendering, copy the finished `.mp4` to the user's Desktop. Do not make the user manually find it in `out/`.
+- Audio: every final video should have audio. If the user does not provide music, voiceover, or sound effects, create or source a suitable royalty-safe local audio bed yourself and include it before rendering.
 - Animation: drive all movement from Remotion frames using `useCurrentFrame()`, `interpolate()`, `spring()`, and `Easing`. Do not rely on CSS transitions or CSS keyframes for rendered motion.
 
 ## Official Remotion Practices To Preserve
@@ -40,6 +42,7 @@ Turn rough user intent into a polished 20-second Remotion video powered by Three
 3. Build from configuration.
    - Put the creative decisions in `remotion-video-project/src/VideoConfig.ts`.
    - Keep rendering components reusable and data driven.
+   - Put user-provided audio in `remotion-video-project/public/`. If no audio exists, generate a local fallback track with the project script instead of rendering silently.
    - Use scene beats around this rhythm:
      - 0-4s: hook and establishing 3D reveal.
      - 4-11s: main object transformation or feature sequence.
@@ -50,6 +53,7 @@ Turn rough user intent into a polished 20-second Remotion video powered by Three
    - Run type checking before rendering.
    - Render at least one still frame near the middle to catch blank Three.js output.
    - Render the final video when feasible.
+   - Confirm that `remotion-video-project/out/video.mp4` exists and that a copy was placed on the Desktop.
 
 ## Prompt Beautification Pattern
 
@@ -65,7 +69,7 @@ Palette: ...
 Timeline: 0-4s ..., 4-11s ..., 11-17s ..., 17-20s ...
 Text: ...
 Audio direction: ...
-Implementation notes: Remotion + ThreeCanvas, frame-driven motion, 20s, 1080x1920.
+Implementation notes: Remotion + ThreeCanvas, frame-driven motion, 20s, 1080x1920, audio included, final MP4 copied to Desktop.
 ```
 
 ## Quality Bar
